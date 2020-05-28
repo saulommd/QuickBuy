@@ -8,7 +8,10 @@
         public decimal Preco { get; set; }
         public override void Validate()
         {
-            throw new System.NotImplementedException();
+            if (string.IsNullOrEmpty(Nome))
+                AdicionarCritica("Nome não informado");
+            if (string.IsNullOrEmpty(Descricao))
+                AdicionarCritica("Descrição não informada");
         }
     }
 }

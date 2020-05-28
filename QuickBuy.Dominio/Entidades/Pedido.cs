@@ -11,6 +11,7 @@ namespace QuickBuy.Dominio.Entidades
         public int Id { get; set; }
         public DateTime DataPedido { get; set; }
         public int UsuarioId { get; set; }
+        public virtual Usuario Usuario { get; set; }
         public DateTime DataPrevisaoEntrega { get; set; }
         public string EnderecoCompleto { get; set; }
         public string CEP { get; set; }
@@ -18,8 +19,8 @@ namespace QuickBuy.Dominio.Entidades
         public string Estado { get; set; }
         public int NumeroEndereco { get; set; }
 
-        public FormaPagamento FormaPagamento { get; set; }
         public int FormaPagamentoId { get; set; }
+        public FormaPagamento FormaPagamento { get; set; }
 
         /// <summary>
         /// Pedido deve ter pelo menos um item de pedidos ou muitos itens de pedido
@@ -34,7 +35,10 @@ namespace QuickBuy.Dominio.Entidades
                
             if (string.IsNullOrEmpty(CEP))
                 AdicionarCritica("Critica - CEP deve estar preenchido");
-
+            if (FormaPagamentoId == 0)
+            {
+                AdicionarCritica("Forma de Pagamento não informada");
+}
         }
 
     }
